@@ -5,7 +5,7 @@ const teamMembers = [
     name: "Mann Patel",
     role: "Backend Developer",
     about: "Building secure systems that power ScamShield behind the scenes.",
-    image: "/team/Mann.jpg",
+    image: "/team/Mann.jpeg",
   },
   {
     name: "Jaina Patel",
