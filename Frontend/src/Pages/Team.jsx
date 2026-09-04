@@ -11,31 +11,31 @@ const teamMembers = [
     name: "Jaina Patel",
     role: "Frontend Developer",
     about: "Designing clean, intuitive interfaces for a safer user experience.",
-    image: "/team/member2.jpg",
+    image: "/team/Jaina.jpg",
   },
   {
     name: "Aditya Kothari",
     role: "UI Designer",
     about: "Crafting simple, modern designs that make security feel effortless.",
-    image: "/team/member3.jpg",
+    image: "/team/Aditya.jpg",
   },
   {
     name: "Nisarg Banjara",
     role: "AI Testing & Detection Specialist",
     about: "Testing intelligent detection to make ScamShield smarter and reliable.",
-    image: "/team/member4.jpg",
+    image: "/team/Nisarg.jpg",
   },
   {
     name: "Neev Bhalavat",
     role: "Research & Documentation Lead",
     about: "Turning research and ideas into clear, meaningful documentation.",
-    image: "/team/member5.jpg",
+    image: "/team/Neev.jpg",
   },
   {
     name: "Kankshit Bhatt",
     role: "Presentation & Demo Lead",
     about: "Bringing ScamShield to life through impactful demos and presentations.",
-    image: "/team/member6.jpg",
+    image: "/team/Kankshit.jpg",
   },
 ];
 
