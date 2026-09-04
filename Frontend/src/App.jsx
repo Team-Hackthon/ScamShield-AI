@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
-
+import ScrollToTop from "./components/ScrollToTop.jsx";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Analyzer from "./components/Analyzer";
@@ -44,6 +44,7 @@ function App() {
         <span className="floating-shield shield-1">♢</span>
         <span className="floating-shield shield-2">♢</span>
       </div>
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
