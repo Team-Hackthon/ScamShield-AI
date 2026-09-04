@@ -7,7 +7,7 @@ import Hero from "./components/Hero";
 import Analyzer from "./components/Analyzer";
 import HowItWorks from "./components/HowItWorks";
 import Footer from "./components/Footer";
-
+import About from "./components/About.jsx";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Terms from "./Pages/Terms.jsx";
 import Team from "./Pages/Team.jsx";
@@ -21,6 +21,7 @@ function HomePage() {
         <Hero />
         <Analyzer />
         <HowItWorks />
+        <About/>
       </main>
 
       <Footer />

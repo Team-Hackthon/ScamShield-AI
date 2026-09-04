@@ -822,6 +822,282 @@ main {
 }
 
 /* =========================
+   ABOUT SCAMSHIELD
+========================= */
+
+.about-section {
+  position: relative;
+
+  width: 100%;
+
+  padding: 30px 20px 75px;
+
+  text-align: center;
+}
+
+.about-container {
+  width: min(1100px, 94%);
+
+  margin: 0 auto;
+}
+
+.about-section .section-label {
+  margin-bottom: 12px;
+
+  color: #00d8ff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.about-section h2 {
+  margin-bottom: 18px;
+
+  color: #ffffff;
+
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.about-section h2 span {
+  color: #00d8ff;
+
+  text-shadow:
+    0 0 18px rgba(0, 216, 255, 0.3);
+}
+
+.about-intro {
+  width: min(760px, 95%);
+
+  margin: 0 auto 38px;
+
+  color: #aebdca;
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+
+/* =========================
+   ABOUT CARDS
+========================= */
+
+.about-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.about-card {
+  position: relative;
+
+  min-height: 220px;
+
+  padding: 28px 24px;
+
+  overflow: hidden;
+
+  border: 1px solid #263b4d;
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 24, 38, 0.82),
+      rgba(4, 16, 27, 0.78)
+    );
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: -90px;
+  left: 50%;
+
+  width: 190px;
+  height: 190px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 216, 255, 0.09),
+      transparent 65%
+    );
+
+  pointer-events: none;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(0, 216, 255, 0.65);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.25),
+    0 0 25px rgba(0, 216, 255, 0.08);
+}
+
+
+/* =========================
+   ABOUT ICONS
+========================= */
+
+.about-icon {
+  position: relative;
+
+  width: 64px;
+  height: 64px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #00d8ff;
+  border-radius: 50%;
+
+  background: rgba(0, 216, 255, 0.04);
+
+  font-size: 27px;
+
+  box-shadow:
+    0 0 18px rgba(0, 216, 255, 0.12);
+}
+
+.about-card:nth-child(2) .about-icon {
+  border-color: #9747ff;
+
+  box-shadow:
+    0 0 18px rgba(151, 71, 255, 0.15);
+}
+
+.about-card:nth-child(3) .about-icon {
+  border-color: #28e85f;
+
+  box-shadow:
+    0 0 18px rgba(40, 232, 95, 0.15);
+}
+
+
+/* =========================
+   ABOUT TEXT
+========================= */
+
+.about-card h3 {
+  position: relative;
+
+  margin-bottom: 12px;
+
+  color: #ffffff;
+
+  font-size: 19px;
+}
+
+.about-card p {
+  position: relative;
+
+  color: #aebdca;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+
+/* =========================
+   ABOUT MESSAGE
+========================= */
+
+.about-message {
+  width: fit-content;
+
+  max-width: 100%;
+
+  margin: 35px auto 0;
+
+  padding: 13px 25px;
+
+  border: 1px solid rgba(0, 216, 255, 0.18);
+  border-radius: 30px;
+
+  background: rgba(0, 216, 255, 0.035);
+
+  color: #aebdca;
+
+  font-size: 14px;
+
+  box-shadow:
+    0 0 22px rgba(0, 216, 255, 0.04);
+}
+
+.about-message span {
+  margin: 0 9px;
+
+  color: #00d8ff;
+}
+
+.about-message strong {
+  color: #dff8ff;
+}
+
+
+/* =========================
+   ABOUT RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-section {
+    padding: 20px 16px 55px;
+  }
+
+  .about-section h2 {
+    font-size: 30px;
+  }
+
+  .about-intro {
+    font-size: 14px;
+  }
+
+  .about-message {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    line-height: 1.6;
+  }
+}
+
+/* =========================
    FOOTER
 ========================= */
 
