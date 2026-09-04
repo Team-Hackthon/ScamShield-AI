@@ -45,7 +45,7 @@ function Analyzer() {
   setResult(null);
 
   try {
-    const response = await fetch("http://localhost:3000/analyze", {
+    const response = await fetch("https://scamshield-ai-0uij.onrender.com/analyze",  {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
