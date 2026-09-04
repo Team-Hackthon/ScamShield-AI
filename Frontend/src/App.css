@@ -2,18 +2,36 @@
    APP
 ========================= */
 
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
 .app {
+  width: 100%;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
 
   background:
     radial-gradient(
-      circle at 50% 20%,
-      rgba(0, 180, 255, 0.10),
-      transparent 35%
+      circle at 50% 15%,
+      rgba(0, 153, 255, 0.14),
+      transparent 32%
     ),
-    #050b12;
+    linear-gradient(
+      180deg,
+      #020912 0%,
+      #03111c 45%,
+      #020a12 100%
+    );
 }
 
 /* =========================
@@ -23,28 +41,22 @@
 .cyber-background {
   position: absolute;
   inset: 0;
-
   overflow: hidden;
-
   pointer-events: none;
-
   z-index: 0;
 }
 
-/*========================================
-  CREATES RADIAL CIRCLES IN THE BACKGROUND
-=========================================*/
-
+/* Main radar rings */
 
 .app::before {
   content: "";
 
   position: absolute;
-  top: 70px;
+  top: -360px;
   left: 50%;
 
-  width: 1200px;
-  height: 1200px;
+  width: 1550px;
+  height: 1550px;
 
   transform: translateX(-50%);
 
@@ -53,34 +65,106 @@
   background:
     repeating-radial-gradient(
       circle,
-      transparent 0,
-      transparent 105px,
-      rgba(0, 180, 255, 0.045) 106px,
-      transparent 107px
+      transparent 0px,
+      transparent 115px,
+      rgba(0, 163, 255, 0.13) 116px,
+      rgba(0, 163, 255, 0.13) 118px,
+      transparent 119px,
+      transparent 175px
     );
 
-  pointer-events: none;
+  opacity: 0.8;
 
+  pointer-events: none;
   z-index: 0;
 }
-    /*===========================
-      Creates dots in background
-    =============================*/
-.cyber-dot {
+
+/* Central blue glow */
+
+.app::after {
+  content: "";
+
+  position: absolute;
+  top: 60px;
+  left: 50%;
+
+  width: 1050px;
+  height: 650px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(0, 145, 255, 0.14),
+      transparent 68%
+    );
+
+  filter: blur(35px);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Side radar circles */
+
+.cyber-background::before,
+.cyber-background::after {
+  content: "";
+
   position: absolute;
 
-  width: 6px;
-  height: 6px;
+  width: 550px;
+  height: 550px;
 
   border-radius: 50%;
 
-  background: #00cfff;
+  background:
+    repeating-radial-gradient(
+      circle,
+      transparent 0px,
+      transparent 65px,
+      rgba(0, 166, 255, 0.15) 66px,
+      rgba(0, 166, 255, 0.15) 68px,
+      transparent 69px,
+      transparent 105px
+    );
 
-  opacity: 0.35;
+  opacity: 0.75;
+}
+
+.cyber-background::before {
+  top: 430px;
+  left: -360px;
+}
+
+.cyber-background::after {
+  top: 400px;
+  right: -360px;
+}
+
+/* =========================
+   GLOWING DOTS
+========================= */
+
+.cyber-dot {
+  position: absolute;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #18dcff;
+
+  opacity: 0.6;
 
   box-shadow:
-    0 0 8px #00cfff,
-    0 0 16px rgba(0, 207, 255, 0.4);
+    0 0 7px #18dcff,
+    0 0 16px rgba(24, 220, 255, 0.8),
+    0 0 28px rgba(24, 220, 255, 0.35);
+
+  animation: cyberPulse 3s ease-in-out infinite;
 }
 
 .dot-1 {
@@ -113,11 +197,14 @@
   right: 15%;
 }
 
-      /*=================
-        MAKES DOTS BLINK
-      ==================*/
-.cyber-dot {
-  animation: cyberPulse 3s ease-in-out infinite;
+.dot-2,
+.dot-5 {
+  background: #9747ff;
+
+  box-shadow:
+    0 0 7px #9747ff,
+    0 0 18px rgba(151, 71, 255, 0.8),
+    0 0 28px rgba(151, 71, 255, 0.35);
 }
 
 .dot-2,
@@ -131,23 +218,21 @@
 }
 
 @keyframes cyberPulse {
-
   0%,
   100% {
-    opacity: 0.2;
+    opacity: 0.25;
     transform: scale(1);
   }
 
   50% {
-    opacity: 0.65;
-    transform: scale(1.4);
+    opacity: 1;
+    transform: scale(1.5);
   }
-
 }
 
-/*===================================
-  Add floating shield to background
-=====================================*/
+/* =========================
+   FLOATING SHIELDS
+========================= */
 
 .floating-shield {
   position: absolute;
@@ -183,31 +268,13 @@
   right: 8%;
 }
 
+/* Keep content above background */
 
-.app::after {
-  content: "";
-
-  position: absolute;
-
-  top: 100px;
-  left: 50%;
-
-  width: 900px;
-  height: 600px;
-
-  transform: translateX(-50%);
-
-  background: radial-gradient(
-    ellipse,
-    rgba(0, 153, 255, 0.08),
-    transparent 65%
-  );
-
-  filter: blur(30px);
-
-  pointer-events: none;
-
-  z-index: 0;
+.navbar,
+main,
+footer {
+  position: relative;
+  z-index: 2;
 }
 
 /* =========================
@@ -222,7 +289,11 @@
   padding: 18px 5%;
 
   border-bottom: 1px solid #162331;
-  background: rgba(5, 11, 18, 0.95);
+
+  background: rgba(5, 11, 18, 0.86);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .brand {
@@ -298,7 +369,6 @@
   font-weight: 600;
 }
 
-
 /* =========================
    MAIN
 ========================= */
@@ -306,7 +376,6 @@
 main {
   width: 100%;
 }
-
 
 /* =========================
    HERO
@@ -333,7 +402,7 @@ main {
 
   padding: 10px 18px;
 
-  border: 1px solid rgba(0, 216, 255, 0.15);
+  border: 1px solid rgba(0, 216, 255, 0.22);
   border-radius: 25px;
 
   background: rgba(0, 216, 255, 0.04);
@@ -372,7 +441,6 @@ main {
   line-height: 1.6;
 }
 
-
 /* =========================
    ANALYZER CARD
 ========================= */
@@ -387,11 +455,20 @@ main {
   border: 1px solid #008fc4;
   border-radius: 18px;
 
-  background: rgba(4, 14, 25, 0.88);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7, 27, 43, 0.88),
+      rgba(3, 16, 27, 0.91)
+    );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   box-shadow:
-    0 0 25px rgba(0, 200, 255, 0.08),
-    0 15px 40px rgba(0, 0, 0, 0.35);
+    0 18px 45px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(0, 207, 255, 0.09),
+    inset 0 0 30px rgba(0, 207, 255, 0.025);
 }
 
 .analyzer-header {
@@ -418,7 +495,6 @@ main {
   font-weight: 600;
 }
 
-
 /* =========================
    TEXTAREA
 ========================= */
@@ -433,14 +509,12 @@ main {
 
   resize: vertical;
 
-  padding: 22px;
-
-  padding-bottom: 50px;
+  padding: 22px 22px 50px;
 
   border: 1px solid #263646;
   border-radius: 12px;
 
-  background: #050c15;
+  background: rgba(5, 12, 21, 0.93);
 
   color: #ffffff;
 
@@ -474,7 +548,6 @@ main {
 
   font-size: 13px;
 }
-
 
 /* =========================
    ANALYZER ACTIONS
@@ -529,7 +602,6 @@ main {
   transform: translateY(-2px);
 }
 
-
 /* =========================
    ANALYZE BUTTON
 ========================= */
@@ -568,54 +640,6 @@ main {
     0 0 30px rgba(0, 216, 255, 0.5);
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 800px) {
-
-  .navbar {
-    padding: 15px 20px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .hero {
-    padding-top: 35px;
-  }
-
-  .hero p {
-    font-size: 16px;
-  }
-
-  .analyzer-card {
-    margin: 10px 18px 40px;
-    padding: 20px;
-  }
-
-  .analyzer-header {
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 10px;
-  }
-
-  .analyzer-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .quick-tests {
-    flex-wrap: wrap;
-  }
-
-  .analyze-button {
-    width: 100%;
-  }
-}
 /* =========================
    HOW IT WORKS
 ========================= */
@@ -659,7 +683,6 @@ main {
   box-shadow: 0 0 10px rgba(0, 216, 255, 0.6);
 }
 
-
 /* =========================
    STEPS GRID
 ========================= */
@@ -671,7 +694,6 @@ main {
 
   gap: 20px;
 }
-
 
 /* =========================
    STEP CARD
@@ -685,7 +707,15 @@ main {
   border: 1px solid #263b4d;
   border-radius: 14px;
 
-  background: rgba(5, 15, 25, 0.75);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 19, 31, 0.82),
+      rgba(4, 15, 25, 0.76)
+    );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   display: flex;
   flex-direction: column;
@@ -699,9 +729,9 @@ main {
 
   border-color: #00cfff;
 
-  box-shadow: 0 0 25px rgba(0, 207, 255, 0.12);
+  box-shadow:
+    0 0 25px rgba(0, 207, 255, 0.12);
 }
-
 
 /* =========================
    STEP ICON
@@ -728,7 +758,6 @@ main {
     0 0 15px rgba(0, 207, 255, 0.15),
     inset 0 0 15px rgba(0, 207, 255, 0.05);
 }
-
 
 /* =========================
    STEP TEXT
@@ -759,7 +788,6 @@ main {
   font-size: 14px;
   line-height: 1.6;
 }
-
 
 /* =========================
    DIFFERENT CARD COLORS
@@ -793,111 +821,25 @@ main {
   border-color: #28e85f;
 }
 
-
-/* =========================
-   HOW IT WORKS RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-
-  .steps-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-@media (max-width: 550px) {
-
-  .steps-grid {
-    grid-template-columns: 1fr;
-  }
-
-}
 /* =========================
    FOOTER
 ========================= */
 
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
 
-  padding: 25px 5%;
-
-  border-top: 1px solid #162331;
-
-  background: #040a10;
-
-  color: #aeb9c4;
-}
-
-
-/* Footer Logo */
-
-.footer-brand {
-  color: #ffffff;
-
-  font-size: 21px;
-  font-weight: 700;
-}
-
-
-/* Footer Links */
-
-.footer-links {
-  display: flex;
-  align-items: center;
-
-  gap: 0;
-}
-
-.footer-links a {
-  color: #aeb9c4;
-
-  text-decoration: none;
-
-  font-size: 14px;
-
-  padding: 0 25px;
-
-  border-right: 1px solid #40505e;
-
-  transition: 0.25s;
-}
-
-.footer-links a:last-child {
-  border-right: none;
-}
-
-.footer-links a:hover {
-  color: #00d8ff;
-}
-
-
-/* Copyright */
-
-.copyright {
-  font-size: 14px;
-
-  color: #8f9ba6;
-}
-
-
-footer {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto minmax(250px, 1fr) auto;
   align-items: center;
 
-  gap: 30px;
+  gap: 25px;
 
-  padding: 22px 5%;
+  padding: 20px 5%;
 
   border-top: 1px solid #163144;
-  background: #040a10;
+
+  background: rgba(4, 10, 16, 0.95);
 }
-
-
-/* LEFT */
 
 .footer-brand {
   justify-self: start;
@@ -914,30 +856,29 @@ footer {
   white-space: nowrap;
 }
 
-
-/* CENTER */
-
 .footer-quote {
   justify-self: center;
 
+  min-width: 0;
+
   color: #718494;
 
-  font-size: 20px;
+  font-size: 12px;
   font-style: italic;
 
   text-align: center;
 
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.4;
 }
-
-
-/* RIGHT */
 
 .footer-links {
   justify-self: end;
 
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
 
   white-space: nowrap;
 }
@@ -947,9 +888,9 @@ footer {
 
   text-decoration: none;
 
-  font-size: 14px;
+  font-size: 12px;
 
-  padding: 0 20px;
+  padding: 0 12px;
 
   border-right: 1px solid #40505e;
 
@@ -965,55 +906,6 @@ footer {
 
 .footer-links a:hover {
   color: #00d8ff;
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 1050px) {
-
-  footer {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-quote {
-    grid-column: 1 / -1;
-    grid-row: 2;
-
-    margin-top: 5px;
-  }
-
-  .footer-links {
-    justify-self: end;
-  }
-}
-
-@media (max-width: 700px) {
-
-  footer {
-    display: flex;
-    flex-direction: column;
-
-    gap: 16px;
-
-    text-align: center;
-  }
-
-  .footer-links {
-    justify-content: center;
-    flex-wrap: wrap;
-
-    gap: 12px;
-  }
-
-  .footer-links a {
-    border-right: none;
-    padding: 0 8px;
-  }
-
-  .footer-quote {
-    white-space: normal;
-  }
 }
 
 /* =========================
@@ -1113,9 +1005,6 @@ footer {
   color: #9eeeff;
 }
 
-
-/* Spinner */
-
 .spinner {
   width: 20px;
   height: 20px;
@@ -1128,9 +1017,6 @@ footer {
   animation: spin 0.8s linear infinite;
 }
 
-
-/* Animations */
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -1138,7 +1024,6 @@ footer {
 }
 
 @keyframes shieldPulse {
-
   0%,
   100% {
     transform: scale(1);
@@ -1176,11 +1061,6 @@ footer {
   font-size: 16px;
 }
 
-
-/* =========================
-   RESULT LAYOUT
-========================= */
-
 .result-layout {
   display: grid;
   grid-template-columns: 360px 1fr;
@@ -1193,11 +1073,6 @@ footer {
   flex-direction: column;
   gap: 20px;
 }
-
-
-/* =========================
-   RISK CARD
-========================= */
 
 .risk-card {
   padding: 30px 25px;
@@ -1240,9 +1115,6 @@ footer {
   font-size: 12px;
 }
 
-
-/* HIGH RISK */
-
 .risk-circle-high {
   color: #ff8f8f;
   border-color: #ff8f8f;
@@ -1253,9 +1125,6 @@ footer {
 .risk-high {
   color: #ff8f8f;
 }
-
-
-/* MEDIUM RISK */
 
 .risk-circle-medium {
   color: #ffd166;
@@ -1268,9 +1137,6 @@ footer {
   color: #ffd166;
 }
 
-
-/* LOW RISK */
-
 .risk-circle-low {
   color: #3fe6a8;
   border-color: #3fe6a8;
@@ -1281,10 +1147,6 @@ footer {
 .risk-low {
   color: #3fe6a8;
 }
-
-/* =========================
-   SUMMARY CARD
-========================= */
 
 .summary-card {
   padding: 24px;
@@ -1334,11 +1196,6 @@ footer {
 
   line-height: 1.4;
 }
-
-
-/* =========================
-   INDICATORS
-========================= */
 
 .indicators-card {
   padding: 26px;
@@ -1410,11 +1267,6 @@ footer {
   font-size: 14px;
 }
 
-
-/* =========================
-   INFO CARDS
-========================= */
-
 .result-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1458,11 +1310,6 @@ footer {
 .recommendation-card li {
   margin-bottom: 6px;
 }
-
-
-/* =========================
-   RESULT ACTIONS
-========================= */
 
 .result-actions {
   display: grid;
@@ -1516,44 +1363,6 @@ footer {
   border-color: #00d8ff;
 
   color: #00d8ff;
-}
-
-
-/* =========================
-   RESPONSIVE RESULT
-========================= */
-
-@media (max-width: 900px) {
-
-  .result-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .result-info-grid {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-@media (max-width: 600px) {
-
-  .result-page {
-    padding: 35px 16px 50px;
-  }
-
-  .result-heading h1 {
-    font-size: 32px;
-  }
-
-  .result-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .risk-circle {
-    width: 150px;
-    height: 150px;
-  }
-
 }
 
 /* =========================
@@ -1698,21 +1507,11 @@ footer {
   line-height: 1.7;
 }
 
-
-/* =========================
-   TEAM GRID
-========================= */
-
 .team-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
 }
-
-
-/* =========================
-   TEAM CARD
-========================= */
 
 .team-card {
   min-height: 260px;
@@ -1773,11 +1572,6 @@ footer {
     0 0 25px rgba(0, 216, 255, 0.08);
 }
 
-
-/* =========================
-   MEMBER PHOTO
-========================= */
-
 .team-photo-wrapper {
   width: 165px;
   height: 165px;
@@ -1829,11 +1623,6 @@ footer {
   box-shadow: 0 0 12px rgba(0, 216, 255, 0.18);
 }
 
-
-/* =========================
-   MEMBER INFORMATION
-========================= */
-
 .team-info {
   position: relative;
   z-index: 1;
@@ -1873,11 +1662,6 @@ footer {
   line-height: 1.7;
 }
 
-
-/* =========================
-   TEAM MESSAGE
-========================= */
-
 .team-message {
   margin-top: 35px;
   padding: 20px;
@@ -1905,18 +1689,131 @@ footer {
   font-size: 14px;
 }
 
-
 /* =========================
    RESPONSIVE
 ========================= */
 
+@media (max-width: 1050px) {
+  footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-quote {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .footer-links {
+    justify-self: end;
+  }
+}
+
 @media (max-width: 900px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .result-info-grid {
+    grid-template-columns: 1fr;
+  }
+
   .team-grid {
     grid-template-columns: 1fr;
   }
 }
 
+@media (max-width: 800px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 35px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .analyzer-card {
+    margin: 10px 18px 40px;
+    padding: 20px;
+  }
+
+  .analyzer-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .analyzer-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quick-tests {
+    flex-wrap: wrap;
+  }
+
+  .analyze-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  footer {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+  }
+
+  .footer-links a {
+    border-right: none;
+    padding: 0 8px;
+  }
+
+  .footer-quote {
+    white-space: normal;
+  }
+}
+
 @media (max-width: 600px) {
+  .result-page {
+    padding: 35px 16px 50px;
+  }
+
+  .result-heading h1 {
+    font-size: 32px;
+  }
+
+  .result-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .risk-circle {
+    width: 150px;
+    height: 150px;
+  }
+
   .team-page {
     padding: 45px 16px 60px;
   }
@@ -1939,47 +1836,17 @@ footer {
   }
 }
 
-/* =========================
-   GLOBAL RESPONSIVE DESKTOP FIX
-========================= */
-
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
+@media (max-width: 550px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-body {
-  overflow-x: hidden;
-}
-
-.app {
-  width: 100%;
-  min-height: 100vh;
-}
-
-
-/* Keep major sections inside the viewport */
-
-.navbar,
-.hero,
-.analyzer-card,
-.how-it-works,
-.result-page,
-.team-container,
-.legal-container,
-footer {
-  max-width: 100%;
-}
-
 
 /* =========================
    LAPTOP / NORMAL DESKTOP
 ========================= */
 
 @media (min-width: 901px) and (max-width: 1600px) {
-
   .navbar {
     padding-left: 4%;
     padding-right: 4%;
@@ -2002,9 +1869,6 @@ footer {
     line-height: 1.6;
   }
 
-
-  /* Analyzer */
-
   .analyzer-card {
     width: min(1050px, 92%);
     margin-left: auto;
@@ -2019,9 +1883,6 @@ footer {
   .textarea-wrapper textarea {
     min-height: 160px;
   }
-
-
-  /* How it works */
 
   .how-it-works {
     width: min(1150px, 94%);
@@ -2047,9 +1908,6 @@ footer {
     font-size: 13px;
   }
 
-
-  /* Result page */
-
   .result-page {
     width: min(1100px, 94%);
     padding: 40px 0 60px;
@@ -2071,9 +1929,6 @@ footer {
   .risk-circle strong {
     font-size: 36px;
   }
-
-
-  /* Team page */
 
   .team-container {
     width: min(1050px, 94%);
@@ -2104,9 +1959,6 @@ footer {
     font-size: 20px;
   }
 
-
-  /* Legal pages */
-
   .legal-container {
     width: min(850px, 92%);
   }
@@ -2114,9 +1966,6 @@ footer {
   .legal-container h1 {
     font-size: clamp(32px, 3vw, 42px);
   }
-
-
-  /* Footer */
 
   footer {
     padding-left: 4%;
@@ -2136,7 +1985,6 @@ footer {
 }
 
 @media (min-width: 901px) and (max-width: 1400px) {
-
   .navbar {
     padding-top: 14px;
     padding-bottom: 14px;
@@ -2196,39 +2044,4 @@ footer {
   .team-info p {
     font-size: 13px;
   }
-}
-
-/* =========================
-   FOOTER RESPONSIVE FIX
-========================= */
-
-footer {
-  width: 100%;
-  grid-template-columns: auto minmax(250px, 1fr) auto;
-  gap: 25px;
-  padding: 20px 5%;
-}
-
-.footer-brand {
-  white-space: nowrap;
-}
-
-.footer-quote {
-  min-width: 0;
-  white-space: normal;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.footer-links {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-}
-
-.footer-links a {
-  padding: 0 12px;
-  font-size: 12px;
 }
