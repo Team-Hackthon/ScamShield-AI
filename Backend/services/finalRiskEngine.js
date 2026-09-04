@@ -7,7 +7,7 @@ function calculateFinalRisk(ruleResult, aiResult) {
 
     const finalScore = Math.max(
   0,
-  Math.min(Math.round(calculatedScore), 100)
+  Math.min(Math.round(CalculatedScore), 100)
 );
 
     let riskLevel;
