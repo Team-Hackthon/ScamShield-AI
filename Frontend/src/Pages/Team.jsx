@@ -17,7 +17,7 @@ const teamMembers = [
     name: "Aditya Kothari",
     role: "UI Designer",
     about: "Crafting simple, modern designs that make security feel effortless.",
-    image: "/team/Aditya.jpg",
+    image: "/team/Aditya.png",
   },
   {
     name: "Nisarg Banjara",
