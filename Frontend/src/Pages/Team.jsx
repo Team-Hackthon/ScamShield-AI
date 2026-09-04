@@ -65,9 +65,11 @@ function Team() {
 
               <div className="team-photo-wrapper">
                 <img
-                  src={member.image}
-                  alt={member.name}
-                  className="team-photo"
+                    src={member.image}
+                    alt={member.name}
+                    className="team-photo"
+                    draggable="false"
+                    onContextMenu={(e) => e.preventDefault()}
                 />
 
                 <div className="member-number">
