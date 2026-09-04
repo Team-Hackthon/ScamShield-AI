@@ -1,0 +1,19 @@
+# API keys and environment variables
+.env
+.env.*
+Backend/.env
+Frontend/.env
+
+# Dependencies
+node_modules/
+Backend/node_modules/
+Frontend/node_modules/
+
+# Build output
+dist/
+Backend/dist/
+Frontend/dist/
+
+# System files
+.DS_Store
+Thumbs.db
