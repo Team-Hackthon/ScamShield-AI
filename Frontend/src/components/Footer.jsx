@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer>
+    <footer id="about">
       <div className="footer-brand">
         🛡
         <span>
