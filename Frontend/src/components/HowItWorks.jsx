@@ -4,7 +4,7 @@ const steps = [
     icon: "📋",
     title: "Paste",
     text:
-      "Copy any suspicious SMS, email, or chat message and paste it into our secure vault."
+      "Copy and paste any suspicious SMS, email, or chat message into the analyzer."
   },
 
   {
