@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function PrivacyPolicy() {
   return (
     <main className="legal-page">
@@ -67,9 +69,9 @@ function PrivacyPolicy() {
           </p>
         </div>
 
-        <a href="/" className="back-home">
-          ← Back to ScamShield
-        </a>
+       <Link to="/" className="back-home">
+            ← Back to ScamShield
+        </Link>
 
       </div>
     </main>
