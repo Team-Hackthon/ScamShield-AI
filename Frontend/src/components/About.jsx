@@ -17,7 +17,9 @@ function About() {
 
         
         
-        s<div className="about-grid">
+        
+        
+        <div className="about-grid">
 
           <div className="about-card">
             <div className="about-icon">🛡️</div>
