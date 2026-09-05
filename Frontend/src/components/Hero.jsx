@@ -7,7 +7,7 @@ function Hero() {
       </div>
 
       <h1>
-        Is that message <span>safe?</span>
+        Not sure if a message is a scam? <span>Check it before you act.</span>
       </h1>
 
       <p>
