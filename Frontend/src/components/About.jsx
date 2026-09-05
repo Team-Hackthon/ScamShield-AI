@@ -15,7 +15,9 @@ function About() {
           <span>✦</span>
         </div>
 
-        <div className="about-grid">
+        
+        
+        s<div className="about-grid">
 
           <div className="about-card">
             <div className="about-icon">🛡️</div>
