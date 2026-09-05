@@ -53,11 +53,7 @@ function Team() {
             Meet the <span>Team</span>
           </h1>
 
-          <p>
-            Different skills, one mission — building a safer digital
-            experience with ScamShield.
-          </p>
-        </div>
+         </div>
 
         <div className="team-grid">
           {teamMembers.map((member, index) => (
