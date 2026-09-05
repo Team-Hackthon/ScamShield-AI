@@ -6,7 +6,7 @@ function About() {
         <div className="section-label">— ABOUT SCAMSHIELD —</div>
 
         <h2>
-          Built to make digital communication <span>safer.</span>
+          Built to make digital communication <span>safer</span>.
         </h2>
 
         <div className="about-message">
@@ -17,7 +17,7 @@ function About() {
 
         <br/>
         <br/>
-        
+
         <div className="about-grid">
 
           <div className="about-card">
