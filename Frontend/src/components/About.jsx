@@ -9,13 +9,11 @@ function About() {
           Built to make digital communication <span>safer.</span>
         </h2>
 
-        <p className="about-intro">
-          ScamShield is an AI-powered scam detection platform designed to
-          help users identify suspicious messages before they become victims.
-          By combining rule-based threat detection with AI analysis,
-          ScamShield detects phishing attempts, payment scams, credential
-          theft, suspicious links, and social-engineering tactics.
-        </p>
+        <div className="about-message">
+          <span>✦</span>
+          Think before you click. <strong>Verify before you trust.</strong>
+          <span>✦</span>
+        </div>
 
         <div className="about-grid">
 
@@ -54,11 +52,7 @@ function About() {
 
         </div>
 
-        <div className="about-message">
-          <span>✦</span>
-          Think before you click. <strong>Verify before you trust.</strong>
-          <span>✦</span>
-        </div>
+        
 
       </div>
     </section>
