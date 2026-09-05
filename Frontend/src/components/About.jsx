@@ -15,9 +15,8 @@ function About() {
           <span>✦</span>
         </div>
 
-        
-        
-        
+        <br/>
+        <br/>
         
         <div className="about-grid">
 
