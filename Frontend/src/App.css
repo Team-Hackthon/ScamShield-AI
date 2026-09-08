@@ -333,11 +333,11 @@ footer {
 }
 
 .nav-links a:hover {
-  color: #277cc2;
+  color: #757a7d;
 }
 
 .nav-links .active {
-  color: #d93c9a;
+  color: #fcfcfc;
 }
 
 .nav-links .active::after {
