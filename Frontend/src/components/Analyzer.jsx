@@ -68,7 +68,7 @@ function Analyzer() {
     console.error("Analysis failed:", error);
 
     setError(
-      "Unable to analyze message. Please check whether the backend server is running."
+      "/t/t Unable to analyze message. Please check whether the backend server is running."
     );
   } finally {
     setLoading(false);
@@ -195,7 +195,8 @@ if (error) {
       </div>
 
       <div className="analyzer-actions">
-
+        
+        
         <div className="quick-tests">
 
           <span>Quick Test:</span>
