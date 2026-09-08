@@ -337,7 +337,7 @@ footer {
 }
 
 .nav-links .active {
-  color: white;
+  color: #277cc2;
 }
 
 .nav-links .active::after {
