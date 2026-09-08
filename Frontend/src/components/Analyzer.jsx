@@ -68,7 +68,7 @@ function Analyzer() {
     console.error("Analysis failed:", error);
 
     setError(
-      "/t/t Unable to analyze message. Please check whether the backend server is running."
+      "\t\t Unable to analyze message. Please check whether the backend server is running."
     );
   } finally {
     setLoading(false);
