@@ -1,4 +1,3 @@
-import EmailDetails from './EmailDetails.jsx';
 export default function AnalysisResult({ result, onReset }) {
   const level = result.riskLevel?.toLowerCase();
   return (
@@ -58,7 +57,6 @@ export default function AnalysisResult({ result, onReset }) {
 
 
         <div className="result-right">
-          {result.email && <EmailDetails email={result.email} />}
 
           <div className="indicators-card">
 

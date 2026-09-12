@@ -1,11 +1,10 @@
 import { useState } from "react";
 import AnalysisResult from "./AnalysisResult.jsx";
-import EmailAnalyzer from './EmailAnalyzer.jsx';
 
 
 
 
-function MessageAnalyzer() {
+function Analyzer() {
 
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,7 +45,7 @@ function MessageAnalyzer() {
   setResult(null);
 
   try {
-    const response = await fetch(`${(import.meta.env.VITE_API_BASE_URL || 'https://scamshield-ai-0uij.onrender.com').replace(/\/$/, '')}/analyze`,  {
+    const response = await fetch("https://scamshield-ai-0uij.onrender.com/analyze",  {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,6 +61,7 @@ function MessageAnalyzer() {
 
     const data = await response.json();
 
+    console.log("Backend response:", data);
 
     setResult(data);
   } catch (error) {
@@ -240,10 +240,4 @@ if (error) {
   );
 }
 
-export default function Analyzer() {
-  const [mode, setMode] = useState('message');
-  return <><div className="analysis-modes" role="group" aria-label="Analysis type">
-    <button aria-pressed={mode === 'message'} onClick={() => setMode('message')}>Message / URL</button>
-    <button aria-pressed={mode === 'email'} onClick={() => setMode('email')}>Email / .eml</button>
-  </div>{mode === 'message' ? <MessageAnalyzer /> : <EmailAnalyzer />}</>;
-}
+export default Analyzer;

@@ -1,9 +1,10 @@
 const OpenAI = require("openai");
 
-async function analyzeWithAI(message) {
+const client = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
 
-    if (!process.env.OPENAI_API_KEY) throw new Error('AI is not configured');
-    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, timeout: 30000, maxRetries: 0 });
+async function analyzeWithAI(message) {
 
     const response = await client.responses.create({
         model: "gpt-5-mini",
@@ -31,12 +32,7 @@ ${message}
 `
     });
 
-    const result = JSON.parse(response.output_text);
-    if (!Number.isFinite(result.riskScore) || result.riskScore < 0 || result.riskScore > 100 ||
-        !['LOW', 'MEDIUM', 'HIGH'].includes(result.riskLevel) || typeof result.category !== 'string' || typeof result.explanation !== 'string') {
-        throw new Error('Invalid AI assessment');
-    }
-    return result;
+    return JSON.parse(response.output_text);
 }
 
 module.exports = analyzeWithAI;

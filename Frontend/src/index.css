@@ -28,16 +28,3 @@ input {
 a {
   color: inherit;
 }
-/* Phase 1 email analysis */
-.analysis-modes { display: flex; gap: 12px; justify-content: center; margin: 24px auto; }
-.analysis-modes button { padding: 12px 20px; border-radius: 10px; cursor: pointer; }
-.analysis-modes button[aria-pressed="true"] { background: #174db3; color: white; }
-.email-analysis { display: flex; flex-direction: column; gap: 16px; }
-.email-analysis textarea { width: 100%; box-sizing: border-box; padding: 16px; font: inherit; resize: vertical; min-height: 220px; }
-.email-analysis input[type="file"] { max-width: 100%; }
-.email-details { display: grid; gap: 16px; min-width: 0; overflow-wrap: anywhere; }
-.email-details .info-card { min-width: 0; }
-.evidence-scroll { overflow: auto; max-height: 350px; }
-.email-details table { width: 100%; border-collapse: collapse; text-align: left; }
-.email-details th, .email-details td { padding: 8px; border-bottom: 1px solid #64748b; vertical-align: top; }
-.email-analysis button:disabled { opacity: .6; cursor: wait; }

@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     // INPUT VALIDATION
     // =========================
 
-    if (!req.body?.message) {
+    if (!req.body.message) {
         return res.status(400).json({
             error: "Message is required"
         });
