@@ -1,13 +1,13 @@
-function calculateFinalRisk(ruleResult, aiResult) {
+function calculateFinalRisk(ruleResult, aiResult, emailResult = null) {
 
     // Combine rule-based and AI scores
     const CalculatedScore = Math.round(
-        ((ruleResult.riskScore * 0.4) + (aiResult.riskScore * 0.6))
+        aiResult ? ((ruleResult.riskScore * 0.4) + (aiResult.riskScore * 0.6)) : ruleResult.riskScore
     );
 
     const finalScore = Math.max(
   0,
-  Math.min(Math.round(CalculatedScore), 100)
+  Math.min(Math.round(CalculatedScore) + (emailResult?.riskScore || 0), 100)
 );
 
     let riskLevel;

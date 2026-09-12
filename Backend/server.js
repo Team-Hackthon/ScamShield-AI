@@ -19,6 +19,7 @@ app.use(cors());
 // BODY PARSER
 // =========================
 
+app.use('/analyze/email', express.json({ limit: '2mb' }));
 app.use(express.json());
 
 // =========================
@@ -39,7 +40,9 @@ const analyzeLimiter = rateLimit({
 
 const analyzeRoute = require("./routes/analyze");
 
-app.use("/analyze", analyzeLimiter, analyzeRoute);
+app.use('/analyze', analyzeLimiter);
+app.use('/analyze/email', require('./routes/email')());
+app.use("/analyze", analyzeRoute);
 
 // =========================
 // HOME ROUTE
@@ -87,7 +90,10 @@ app.use((req, res) => {
 // =========================
 
 app.use((err, req, res, next) => {
-    console.error("Server Error:", err);
+    if (err.status === 400 || err.status === 413) {
+        return res.status(err.status).json({ error: err.status === 413 ? 'Email or request exceeds the size limit.' : 'Invalid email or request. Supply complete headers and a body.' });
+    }
+    console.error("Server Error:", err.name);
 
     res.status(500).json({
         error: "Internal server error",
@@ -99,10 +105,11 @@ app.use((err, req, res, next) => {
 // START SERVER
 // =========================
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+if (require.main === module) app.listen(PORT, () => {
     console.log(
         `ScamShield AI Backend running on http://localhost:${PORT}`
     );
 });
+module.exports = app;
