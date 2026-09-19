@@ -180,14 +180,22 @@ if (error) {
       <div className="textarea-wrapper">
 
         <textarea
-          placeholder="Paste the suspicious message here..."
           value={message}
-          maxLength={5000}
-          onChange={(event) =>
-            setMessage(event.target.value)
-          }
-        />
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+           if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
 
+           if (!loading) {
+        handleAnalyze();
+      }
+    }
+  }}
+  placeholder="Paste suspicious message here..."
+/>
+<p className="input-hint">
+  Press Enter to analyze • Shift + Enter for a new line
+</p>
         <div className="character-count">
           {message.length} / 5000 chars
         </div>

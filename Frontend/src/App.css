@@ -549,7 +549,11 @@ main {
 
   font-size: 13px;
 }
-
+.input-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.6;
+}
 /* =========================
    ANALYZER ACTIONS
 ========================= */
