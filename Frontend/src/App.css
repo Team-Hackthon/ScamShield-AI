@@ -539,15 +539,18 @@ main {
     0 0 18px rgba(0, 207, 255, 0.08);
 }
 
-.character-count {
-  position: absolute;
+.char-counter {
+  display: block;
+  width: 100%;
+  text-align: right;
 
-  right: 18px;
-  bottom: 16px;
+  margin-top: 8px;
+  padding-right: 10px;
 
-  color: #c5ced7;
+  box-sizing: border-box;
 
-  font-size: 13px;
+  font-size: 16px;
+  color: #c5cfdd;
 }
 .input-hint {
   margin-top: 8px;
