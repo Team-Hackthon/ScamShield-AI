@@ -17,6 +17,34 @@ export default function AnalysisResult({ result, onReset }) {
     detectedLanguage !== "English" &&
     result.originalLanguage;
 
+    // =========================
+// TRANSLATED UI LABELS
+// =========================
+
+const uiLabels = {
+  English: {
+    whyRisky: "Why is this risky?",
+    whatToDo: "What should you do?",
+  },
+
+  Hindi: {
+    whyRisky: "यह जोखिम भरा क्यों है?",
+    whatToDo: "आपको क्या करना चाहिए?",
+  },
+
+  Gujarati: {
+    whyRisky: "આ જોખમી કેમ છે?",
+    whatToDo: "તમારે શું કરવું જોઈએ?",
+  },
+
+  Hinglish: {
+    whyRisky: "Yeh risky kyun hai?",
+    whatToDo: "Aapko kya karna chahiye?",
+  },
+};const labels =
+  selectedLanguage === "original"
+    ? uiLabels[detectedLanguage] || uiLabels.English
+    : uiLabels.English;
   // =========================
   // SELECT DISPLAY CONTENT
   // =========================
@@ -327,10 +355,9 @@ ${recommendationText}
             {/* EXPLANATION */}
 
             <div className="info-card">
-
-              <h3>
-                Why is this risky?
-              </h3>
+                <h3>
+                   {labels.whyRisky}
+                </h3>
 
               <p>
                 {explanation}
@@ -346,7 +373,7 @@ ${recommendationText}
             <div className="info-card recommendation-card">
 
               <h3>
-                What should you do?
+                {labels.whatToDo}
               </h3>
 
 
