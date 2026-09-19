@@ -5,142 +5,166 @@ const analyzeMessage = require("../services/scamDetector");
 const analyzeWithAI = require("../services/aiAnalyzer");
 const calculateFinalRisk = require("../services/finalRiskEngine");
 
-
 router.post("/", async (req, res) => {
 
+  // =========================
+  // INPUT VALIDATION
+  // =========================
+
+  if (!req.body.message) {
+    return res.status(400).json({
+      error: "Message is required"
+    });
+  }
+
+  if (typeof req.body.message !== "string") {
+    return res.status(400).json({
+      error: "Message must be text"
+    });
+  }
+
+  const message = req.body.message.trim();
+
+  if (message.length === 0) {
+    return res.status(400).json({
+      error: "Message cannot be empty"
+    });
+  }
+
+  if (message.length > 5000) {
+    return res.status(400).json({
+      error: "Message is too long. Maximum length is 5000 characters."
+    });
+  }
+
+  try {
+
     // =========================
-    // INPUT VALIDATION
+    // AI ANALYSIS FIRST
     // =========================
 
-    if (!req.body.message) {
-        return res.status(400).json({
-            error: "Message is required"
-        });
-    }
-
-    if (typeof req.body.message !== "string") {
-        return res.status(400).json({
-            error: "Message must be text"
-        });
-    }
-
-    // Remove extra spaces
-    const message = req.body.message.trim();
-
-    if (message.length === 0) {
-        return res.status(400).json({
-            error: "Message cannot be empty"
-        });
-    }
-
-    if (message.length > 5000) {
-        return res.status(400).json({
-            error: "Message is too long. Maximum length is 5000 characters."
-        });
-    }
-
+    const aiResult = await analyzeWithAI(message);
 
     // =========================
     // RULE-BASED ANALYSIS
     // =========================
 
-    const ruleResult = analyzeMessage(message.toLowerCase());
+    /*
+      AI converts Hindi / Gujarati / Hinglish messages
+      into normalized English for the existing rule engine.
 
+      English messages also receive normalized English.
+    */
 
-    try {
+    const normalizedMessage =
+      aiResult.normalizedText || message;
 
-        // =========================
-        // AI ANALYSIS
-        // =========================
+    const ruleResult = analyzeMessage(
+      normalizedMessage.toLowerCase()
+    );
 
-        const aiResult = await analyzeWithAI(message);
+    // =========================
+    // FINAL RISK
+    // =========================
 
+    const finalResult = calculateFinalRisk(
+      ruleResult,
+      aiResult
+    );
 
-        // =========================
-        // COMBINE AI + RULE RESULTS
-        // =========================
+    // =========================
+    // SUCCESS RESPONSE
+    // =========================
 
-        const finalResult = calculateFinalRisk(
-            ruleResult,
-            aiResult
-        );
+    return res.status(200).json({
 
+      detectedLanguage: aiResult.detectedLanguage,
 
-        // =========================
-        // SUCCESS RESPONSE
-        // =========================
+      riskScore: finalResult.riskScore,
 
-        return res.status(200).json({
+      riskLevel: finalResult.riskLevel,
 
-            riskScore: finalResult.riskScore,
+      // English result
+      english: {
+      category: aiResult.english.category,
+      explanation: aiResult.english.explanation,
+      recommendations: aiResult.english.recommendations
+},
 
-            riskLevel: finalResult.riskLevel,
+      // Original-language result
+      originalLanguage: {
+          language: aiResult.originalLanguage.language,
+          category: aiResult.originalLanguage.category,
+          explanation: aiResult.originalLanguage.explanation,
+          recommendations:
+    aiResult.originalLanguage.recommendations
+},
 
-            category: aiResult.category,
+      // Rule evidence
+      reasons: ruleResult.reasons,
 
-            explanation: aiResult.explanation,
+      ruleBased: {
+        riskScore: ruleResult.riskScore,
+        riskLevel: ruleResult.riskLevel,
+        categories: ruleResult.categories
+      },
 
-            recommendation: finalResult.recommendation,
+      aiAnalysis: {
+        riskScore: aiResult.riskScore,
+        riskLevel: aiResult.riskLevel
+      },
 
-            reasons: ruleResult.reasons,
+      aiAvailable: true
+    });
 
-            ruleBased: {
-                riskScore: ruleResult.riskScore,
-                riskLevel: ruleResult.riskLevel,
-                categories: ruleResult.categories
-            },
+  } catch (error) {
 
-            aiAnalysis: {
-                riskScore: aiResult.riskScore,
-                riskLevel: aiResult.riskLevel,
-                category: aiResult.category
-            },
+    console.error("AI Error:", error.message);
 
-            aiAvailable: true
-        });
+    // =========================
+    // AI FAILURE FALLBACK
+    // =========================
 
+    /*
+      If AI fails, multilingual normalization is unavailable,
+      so run the original message through the rule engine.
+    */
 
-    } catch (error) {
+    const ruleResult = analyzeMessage(
+      message.toLowerCase()
+    );
 
-        console.error("AI Error:", error.message);
+    return res.status(200).json({
 
+      detectedLanguage: "Unknown",
 
-        // =========================
-        // AI FAILURE FALLBACK
-        // =========================
+      riskScore: ruleResult.riskScore,
 
-        return res.status(200).json({
+      riskLevel: ruleResult.riskLevel,
 
-            riskScore: ruleResult.riskScore,
+      english: {
+        category:
+          ruleResult.categories.length > 0
+            ? ruleResult.categories.join(", ")
+            : "Unknown",
 
-            riskLevel: ruleResult.riskLevel,
+        explanation:
+          "AI analysis is currently unavailable. Result generated using ScamShield's rule-based detection."
+      },
 
-            category:
-                ruleResult.categories.length > 0
-                    ? ruleResult.categories.join(", ")
-                    : "Unknown",
+      originalLanguage: null,
 
-            explanation:
-                "AI analysis is currently unavailable. Result generated using ScamShield's rule-based detection.",
+      reasons: ruleResult.reasons,
 
-            recommendation:
-                ruleResult.riskScore >= 70
-                    ? "Do not click suspicious links or share OTP, passwords, PINs, or banking details."
-                    : "Stay cautious and verify the sender before taking any action.",
+      ruleBased: {
+        riskScore: ruleResult.riskScore,
+        riskLevel: ruleResult.riskLevel,
+        categories: ruleResult.categories
+      },
 
-            reasons: ruleResult.reasons,
-
-            ruleBased: {
-                riskScore: ruleResult.riskScore,
-                riskLevel: ruleResult.riskLevel,
-                categories: ruleResult.categories
-            },
-
-            aiAvailable: false
-        });
-    }
-
+      aiAvailable: false
+    });
+  }
 });
-
 
 module.exports = router;

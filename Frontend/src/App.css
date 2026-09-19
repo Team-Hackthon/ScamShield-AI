@@ -1641,7 +1641,71 @@ footer {
 
   color: #00d8ff;
 }
+/* ========================================
+   RESULT LANGUAGE SWITCH
+======================================== */
 
+.result-language-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 20px;
+
+  padding: 5px;
+
+  width: fit-content;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(10px);
+}
+
+
+.language-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #9ca3af;
+
+  padding: 9px 18px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+
+.language-btn:hover {
+  color: white;
+
+  background: rgba(255, 255, 255, 0.06);
+}
+
+
+.language-btn.active {
+  color: white;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.06);
+}
 /* =========================
    LEGAL PAGES
 ========================= */
