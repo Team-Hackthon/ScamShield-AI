@@ -199,6 +199,9 @@ if (error) {
     {message.length} / 5000 chars
   </span>
 
+<p className="input-hint">
+  Press Enter to analyze • Shift + Enter for a new line
+</p>
 </div>
       <div className="analyzer-actions">
         
