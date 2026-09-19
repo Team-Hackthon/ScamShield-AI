@@ -179,29 +179,27 @@ if (error) {
 
       <div className="textarea-wrapper">
 
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-           if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
+  <textarea
+    value={message}
+    onChange={(e) => setMessage(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
 
-           if (!loading) {
-        handleAnalyze();
+        if (!loading) {
+          handleAnalyze();
+        }
       }
-    }
-  }}
-  placeholder="Paste suspicious message here..."
-/>
-<p className="input-hint">
-  Press Enter to analyze • Shift + Enter for a new line
-</p>
-        <div className="character-count">
-          {message.length} / 5000 chars
-        </div>
+    }}
+    maxLength={5000}
+    placeholder="Paste suspicious message here..."
+  />
 
-      </div>
+  <span className="char-counter">
+    {message.length} / 5000 chars
+  </span>
 
+</div>
       <div className="analyzer-actions">
         
         
